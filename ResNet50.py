@@ -229,6 +229,6 @@ logger.setLevel(logging.DEBUG)
 #print("cuDNN Version:", tf_build_info.cudnn_version_number)
 
 trainTaskIndex = sys.argv[1]
-batchSize = sys.argv[2]
+batchSize = int(sys.argv[2])
 
 train_task(trainTaskIndex, batchSize)
