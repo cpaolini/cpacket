@@ -106,7 +106,7 @@ def preprocess_data(X, Y):
 
 #"worker": ["130.191.49.239:50000", "130.191.49.91:50000"]
 #"worker": ["130.191.49.239:50000", "130.191.49.65:50000"]
-def train_task(index):
+def train_task(index, batchSize):
 
     tf_config = {
         'cluster': {
@@ -203,7 +203,7 @@ def train_task(index):
 
       #                          validation_data=(x_test, y_test),
       print("model.fit")
-      history = model.fit(train_data.repeat(), batch_size=32, epochs=100, verbose=2, steps_per_epoch=10)
+      history = model.fit(train_data.repeat(), batch_size=batchSize, epochs=100, verbose=2, steps_per_epoch=10)
       #history = model.fit(x_train, y_train, batch_size=32, epochs=1, verbose=2)
       print("model.fit done")
       #model.summary()
@@ -219,11 +219,9 @@ except:
 
 print(tf.__version__)
 
-print("1")
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger.setLevel(logging.DEBUG)
-print("2")
 
 #from tensorflow.python.client import device_lib
 #print(device_lib.list_local_devices())
@@ -231,4 +229,7 @@ print("2")
 #print("CUDA Version:", tf_build_info.cuda_version_number)
 #print("cuDNN Version:", tf_build_info.cudnn_version_number)
 
-train_task(sys.argv[1])
+trainTaskIndex = sys.argv[1]
+batchSize = sys.argv[2]
+
+train_task(trainTaskIndex, batchSize)
