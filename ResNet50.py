@@ -108,6 +108,8 @@ def preprocess_data(X, Y):
 #"worker": ["130.191.49.239:50000", "130.191.49.65:50000"]
 def train_task(index, batchSize):
 
+    print(f'train_task: index={index}, batchSize={batchSize}')
+
     tf_config = {
         'cluster': {
             "worker": ["130.191.49.239:50000", "130.191.49.91:50000", "130.191.49.65:50000"]
@@ -117,13 +119,10 @@ def train_task(index, batchSize):
     
     os.environ['TF_CONFIG'] = json.dumps(tf_config)
 
-    per_worker_batch_size = 32
+    per_worker_batch_size = batchSize
     num_workers = len(tf_config['cluster']['worker'])
     global_batch_size = per_worker_batch_size * num_workers
     print(f'global_batch_size: {global_batch_size}')
-
-
-    #print(f' * 1 * ')
     
     strategy = tf.distribute.MultiWorkerMirroredStrategy()
     #strategy = tf.distribute.experimental.MultiWorkerMirroredStrategy(tf.distribute.experimental.CollectiveCommunication.RING)
