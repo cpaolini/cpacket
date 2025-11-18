@@ -202,7 +202,7 @@ def train_task(index, batchSize):
 
       #                          validation_data=(x_test, y_test),
       print("model.fit")
-      history = model.fit(train_data.repeat(), batch_size=batchSize, epochs=1, verbose=2, steps_per_epoch=1000)
+      history = model.fit(train_data.repeat(), batch_size=batchSize, epochs=1, verbose=2)
       #history = model.fit(x_train, y_train, batch_size=32, epochs=1, verbose=2)
       print("model.fit done")
       #model.summary()
@@ -229,6 +229,6 @@ logger.setLevel(logging.DEBUG)
 #print("cuDNN Version:", tf_build_info.cudnn_version_number)
 
 trainTaskIndex = sys.argv[1]
-batchSize = int(sys.argv[2])
+batchSize = 256 # int(sys.argv[2])
 
 train_task(trainTaskIndex, batchSize)
