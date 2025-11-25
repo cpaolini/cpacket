@@ -202,7 +202,7 @@ def train_task(index, batchSize):
 
       #                          validation_data=(x_test, y_test),
       print("model.fit")
-      history = model.fit(train_data.repeat(), batch_size=batchSize, epochs=1, verbose=2)
+      history = model.fit(train_data.repeat(), batch_size=batchSize, epochs=1, verbose=2, steps_per_epoch=EVALUATION_INTERVAL)
       #history = model.fit(x_train, y_train, batch_size=32, epochs=1, verbose=2)
       print("model.fit done")
       #model.summary()
